@@ -1,0 +1,19 @@
+Vagrant.configure(2) do |config|
+
+  config.vm.box = "centos"
+  config.vm.network "private_network", ip: "10.0.101.101"
+  config.vm.hostname = "centos.box.oliverlietz.de"
+  config.vm.provision "file", source: "files/authorized_keys", destination: "~/.ssh/authorized_keys"
+
+  config.vm.provider "virtualbox" do |v|
+    v.name = "centos"
+    v.memory = 8192
+    v.cpus = 4
+  end
+
+  config.ssh.username = "centos"
+  config.ssh.password = "centos"
+  config.ssh.private_key_path = "~/.ssh/id_rsa"
+  config.ssh.insert_key = false
+
+end
